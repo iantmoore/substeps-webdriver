@@ -36,6 +36,18 @@ public class RemoteDriverFactory extends BaseDriverFactory implements DriverFact
         caps.setCapability("platform", cfg.getString("remote.driver.platform")); // "Linux"
         caps.setCapability("version", cfg.getString("remote.driver.version")); // "48.0"
 
+// TODO
+//        caps.setCapability("name", "");
+//        caps.setCapability("build", getProjectVersion());
+
+        String tunnelId = System.getProperty("TRAVIS_JOB_NUMBER");
+
+        log.info("** TUNNEL ID: " + tunnelId);
+
+        if (tunnelId != null) {
+            caps.setCapability("tunnel-identifier", tunnelId);
+        }
+
         URL url;
 
         try {
